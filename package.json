@@ -20,7 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "lint-staged": {
-    "**/*.ts": ["eslint \"{src,apps,libs,test}/**/*.ts\" --fix", "prettier --write ."]
+    "{src,apps,libs,test}/**/*.ts": ["eslint \"{src,apps,libs,test}/**/*.ts\" --fix", "prettier --write ."]
   },
   "husky": {
     "hooks": {
