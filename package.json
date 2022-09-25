@@ -20,7 +20,10 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "lint-staged": {
-    "{src,apps,libs,test}/**/*.ts": ["eslint \"{src,apps,libs,test}/**/*.ts\" --fix", "prettier --write ."]
+    "{src,apps,libs,test}/**/*.ts": [
+      "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+      "prettier --write ."
+    ]
   },
   "husky": {
     "hooks": {
@@ -33,6 +36,7 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^9.0.0",
     "@prisma/client": "^4.3.1",
+    "bcrypt": "^5.0.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "reflect-metadata": "^0.1.13",
@@ -43,6 +47,7 @@
     "@nestjs/cli": "^9.0.0",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
+    "@types/bcrypt": "^5.0.0",
     "@types/express": "^4.17.13",
     "@types/jest": "^28.1.4",
     "@types/node": "^18.0.3",
@@ -53,8 +58,8 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.1",
-    "lint-staged": "^13.0.3",
     "jest": "^28.1.2",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "prisma": "^4.3.1",
     "source-map-support": "^0.5.21",

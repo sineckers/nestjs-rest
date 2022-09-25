@@ -23,7 +23,7 @@ model Posts {
 
 model Users {
   id       String  @id @default(auto()) @map("_id") @db.ObjectId
-  email    String
+  email    String  @unique
   name     String
   surname  String
   password String

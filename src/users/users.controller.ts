@@ -39,4 +39,8 @@ export class UsersController {
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
   }
+
+  findByEmail(@Param('email') email: string) {
+    return this.usersService.findByEmail(email);
+  }
 }
