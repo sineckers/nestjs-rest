@@ -5,18 +5,17 @@ import { UsersModule } from './users/users.module';
 import { PostsModule } from './posts/posts.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
-import { APP_GUARD } from '@nestjs/core';
-import { JwtAuthGuard } from './auth/guard/jwt-auth.guard';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [UsersModule, PostsModule, PrismaModule, AuthModule],
-  controllers: [AppController],
-  providers: [
-    AppService,
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: JwtAuthGuard,
-    // },
+  imports: [
+    UsersModule,
+    PostsModule,
+    PrismaModule,
+    AuthModule,
+    ConfigModule.forRoot(),
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

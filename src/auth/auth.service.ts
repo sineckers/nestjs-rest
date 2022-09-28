@@ -19,6 +19,10 @@ export class AuthService {
 
     const passwordValid = await compare(password, user.password);
 
+    if (!passwordValid) {
+      throw new NotAcceptableException('password is not valid');
+    }
+
     if (user && passwordValid) {
       return user;
     }
