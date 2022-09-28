@@ -19,8 +19,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
           result = await next(params);
         } else if (
           params.action == 'findUnique' ||
-          params.action == 'findMany' ||
-          params.action == 'findFirst'
+          params.action == 'findMany'
         ) {
           result = await next(params);
           if (result.length > 0) {
@@ -32,7 +31,6 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
           }
         } else {
           result = await next(params);
-          delete result.password;
         }
       }
       return result;
