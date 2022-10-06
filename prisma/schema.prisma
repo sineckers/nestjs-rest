@@ -7,14 +7,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-type PostsComments {
-  content String
-  userId  String @db.ObjectId
-}
 
 model Posts {
   id       String          @id @default(auto()) @map("_id") @db.ObjectId
-  comments PostsComments[]
+  comments Comments[]
   content  String
   title    String
   userId   String          @db.ObjectId
@@ -28,4 +24,12 @@ model Users {
   surname  String
   password String
   posts    Posts[]
+}
+
+model Comments {
+  userId   String  @db.ObjectId
+  postId   String  @db.ObjectId
+  post     Posts   @relation(fields: [postId], references: [id])
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  content  String
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Posts } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { CreateCommentDto } from './dto/create-comment.dto';
 
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
@@ -9,7 +10,13 @@ import { UpdatePostDto } from './dto/update-post.dto';
 export class PostsService {
   constructor(private prisma: PrismaService) {}
   create(createPostDto: CreatePostDto) {
-    return 'This action adds a new post';
+    return this.prisma.posts.create({
+      data: {
+        title: createPostDto.title,
+        content: createPostDto.content,
+        userId: createPostDto.userId,
+      },
+    });
   }
 
   findAll(): Promise<Posts[]> {
@@ -24,11 +31,52 @@ export class PostsService {
     });
   }
 
-  update(id: number, updatePostDto: UpdatePostDto) {
-    return `This action updates a #${id} post`;
+  update(id: string, updatePostDto: UpdatePostDto) {
+    return this.prisma.posts.update({
+      where: {
+        id: id,
+      },
+      data: {
+        title: updatePostDto.title,
+        content: updatePostDto.content,
+      },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} post`;
+  remove(id: string) {
+    return this.prisma.posts.delete({
+      where: {
+        id: id,
+      },
+    });
+  }
+
+  getComments(id: string) {
+    return this.prisma.posts.findUnique({
+      where: {
+        id: id,
+      },
+      select: {
+        comments: true,
+      },
+    });
+  }
+
+  makeComment(createCommentDto: CreateCommentDto) {
+    return this.prisma.comments.create({
+      data: {
+        content: createCommentDto.content,
+        postId: createCommentDto.postId,
+        userId: createCommentDto.userId,
+      },
+    });
+  }
+
+  deleteComment(id: string) {
+    return this.prisma.comments.delete({
+      where: {
+        id: id,
+      },
+    });
   }
 }
